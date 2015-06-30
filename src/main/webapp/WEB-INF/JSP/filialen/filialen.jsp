@@ -3,9 +3,18 @@
 <%@taglib prefix='v' uri='http://vdab.be/tags'%>
 <!doctype html>
 <html lang='nl'>
-<head><v:head title='Filialen' /></head>
+<head>
+<v:head title='Filialen' />
+</head>
 <body>
 	<v:menu />
 	<h1>Filialen</h1>
+	<c:forEach items='${filialen}' var='filiaal'>
+		<h2>${filiaal.naam}</h2>
+		<p>${filiaal.adres.straat}
+			${filiaal.adres.huisNr}<br> ${filiaal.adres.postcode}
+			${filiaal.adres.gemeente}
+		</p>
+	</c:forEach>
 </body>
 </html>

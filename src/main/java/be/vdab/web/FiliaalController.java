@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import be.vdab.services.FiliaalService;
 
@@ -34,8 +35,9 @@ class FiliaalController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	String findAll() {
-		return FILIALEN_VIEW;
+	ModelAndView findAll() {
+		return new ModelAndView(FILIALEN_VIEW, "filialen",
+				filiaalService.findAll());
 	}
 
 	@RequestMapping(value = "toevoegen", method = RequestMethod.GET)
