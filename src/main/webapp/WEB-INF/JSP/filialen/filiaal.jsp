@@ -1,7 +1,7 @@
 <%@page contentType='text/html' pageEncoding='UTF-8' session='false'%>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
-<%@taglib prefix='fmt' uri='http://java.sun.com/jsp/jstl/fmt'%>
 <%@taglib prefix='v' uri='http://vdab.be/tags'%>
+<%@taglib prefix='spring' uri='http://www.springframework.org/tags'%>
 <%@taglib prefix='spring' uri='http://www.springframework.org/tags'%>
 <!doctype html>
 <html lang='nl'>
@@ -13,7 +13,8 @@
 	<c:choose>
 		<c:when test="${not empty filiaal}">
 			<h1>${filiaal.naam}</h1>
-			<dl><dt>Straat</dt>
+			<dl>
+				<dt>Straat</dt>
 				<dd>${filiaal.adres.straat}</dd>
 				<dt>Huisnr.</dt>
 				<dd>${filiaal.adres.huisNr}</dd>
@@ -24,15 +25,21 @@
 				<dt>Type</dt>
 				<dd>${filiaal.hoofdFiliaal ? "Hoofdfiliaal" : "Bijfiliaal"}</dd>
 				<dt>Waarde gebouw</dt>
-				<dd>&euro; <fmt:formatNumber value='${filiaal.waardeGebouw}' /></dd>
+				<dd>
+					&euro;
+					<spring:eval expression='filiaal.waardeGebouw' />
+				</dd>
 				<dt>Ingebruikname</dt>
-				<dd><fmt:formatDate value='${filiaal.inGebruikName}'
-						type="date" dateStyle="short" /></dd></dl>
+				<dd>
+					<spring:eval expression='filiaal.inGebruikName' />
+				</dd>
+			</dl>
 			<spring:url value='/filialen/{id}/verwijderen' var='verwijderURL'>
 				<spring:param name='id' value='${filiaal.id}' />
 			</spring:url>
-			<form action='${verwijderURL}' method='post'><input
-				type='submit' value='Verwijderen'></form>
+			<form action='${verwijderURL}' method='post'>
+				<input type='submit' value='Verwijderen'>
+			</form>
 		</c:when>
 		<c:otherwise>
 			<div class='fout'>Filiaal niet gevonden</div>
