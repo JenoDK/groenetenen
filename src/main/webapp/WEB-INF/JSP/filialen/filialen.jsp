@@ -9,11 +9,16 @@
 </head>
 <body>
 	<v:menu />
-	<h1>Filialen</h1>
+	<h1>
+		<spring:message code="aantalFilialen" arguments="${aantalFilialen}" />
+	</h1>
 	<c:forEach items='${filialen}' var='filiaal'>
-		<h2><spring:url var='url' value='/filialen/{id}'>
+		<h2>
+			<spring:url var='url' value='/filialen/{id}'>
 				<spring:param name='id' value='${filiaal.id}' />
-			</spring:url> <a href='${url}'>${filiaal.naam}</a></h2>
+			</spring:url>
+			<a href='${url}'>${filiaal.naam}</a>
+		</h2>
 		<p>${filiaal.adres.straat}${filiaal.adres.huisNr}<br>
 			${filiaal.adres.postcode} ${filiaal.adres.gemeente}
 		</p>
