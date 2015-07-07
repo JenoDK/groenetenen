@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import be.vdab.entities.Filiaal;
@@ -17,8 +20,12 @@ import be.vdab.valueobjects.PostcodeReeks;
 @Repository
 class FiliaalDAOImpl implements FiliaalDAO {
 	private final Map<Long, Filiaal> filialen = new ConcurrentHashMap<>();
+	private final JdbcTemplate jdbcTemplate;
+	private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-	FiliaalDAOImpl() {
+	@Autowired
+	FiliaalDAOImpl(JdbcTemplate jdbcTemplate,
+			NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		filialen.put(1L,
 				new Filiaal(1, "Andros", true, BigDecimal.valueOf(1000),
 						new Date(), new Adres("Keizerslaan", "11", 1000,
@@ -31,7 +38,10 @@ class FiliaalDAOImpl implements FiliaalDAO {
 				new Filiaal(3, "Gavdos", false, BigDecimal.valueOf(3000),
 						new Date(), new Adres("Koestraat", "44", 9700,
 								"Oudenaarde")));
+		this.jdbcTemplate = jdbcTemplate;
+		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
+	
 
 	@Override
 	public void create(Filiaal filiaal) {
