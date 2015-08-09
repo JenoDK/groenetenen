@@ -3,16 +3,20 @@ package be.vdab.entities;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "werknemers")
+@NamedEntityGraph(name = "Werknemer.metFiliaal", attributeNodes = @NamedAttributeNode("filiaal"))
 public class Werknemer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -24,6 +28,7 @@ public class Werknemer implements Serializable {
 	@JoinColumn(name = "filiaalId")
 	private Filiaal filiaal;
 	private BigDecimal wedde;
+	@Column(unique = true)
 	private long rijksregisterNr;
 
 	public long getId() {

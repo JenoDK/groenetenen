@@ -18,6 +18,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -28,8 +30,11 @@ import org.springframework.format.annotation.NumberFormat.Style;
 
 import be.vdab.valueobjects.Adres;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "filialen")
+@XmlRootElement
 public class Filiaal implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -53,6 +58,8 @@ public class Filiaal implements Serializable {
 	@Embedded
 	private Adres adres;
 	@OneToMany(mappedBy = "filiaal")
+	@XmlTransient
+	@JsonIgnore
 	private Set<Werknemer> werknemers;
 
 	public Set<Werknemer> getWerknemers() {
@@ -123,5 +130,9 @@ public class Filiaal implements Serializable {
 			BigDecimal waardeGebouw, Date inGebruikName, Adres adres) {
 		this(naam, hoofdFiliaal, waardeGebouw, inGebruikName, adres);
 		this.id = id;
+	}
+
+	public void afschrijven() {
+		this.waardeGebouw = BigDecimal.ZERO;
 	}
 }

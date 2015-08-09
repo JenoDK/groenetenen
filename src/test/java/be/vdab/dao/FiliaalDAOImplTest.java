@@ -17,8 +17,8 @@ import be.vdab.entities.Filiaal;
 import be.vdab.valueobjects.Adres;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = { CreateTestDataSourceBean.class,
-		CreateDAOBeans.class, })
+@ContextConfiguration(classes = { CreateTestDAOBeans.class,
+		CreateTestDataSourceBean.class })
 // DataSource bean en DAO beans laden in IOC container
 @Transactional
 // omringt elke test met een transactie, na de test rollback

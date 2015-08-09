@@ -85,6 +85,17 @@
 			<artifactId>spring-data-jpa</artifactId>
 			<version>1.7.2.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.wisdom-framework</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>[2.3,]</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>[2.5,]</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

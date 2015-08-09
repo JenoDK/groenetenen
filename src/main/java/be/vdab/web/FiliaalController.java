@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -21,7 +22,7 @@ import be.vdab.services.FiliaalService;
 import be.vdab.valueobjects.PostcodeReeks;
 
 @Controller
-@RequestMapping("/filialen")
+@RequestMapping(value = "/filialen", produces = MediaType.TEXT_HTML_VALUE)
 class FiliaalController {
 	private static final String FILIALEN_VIEW = "filialen/filialen";
 	private static final String TOEVOEGEN_VIEW = "filialen/toevoegen";
@@ -34,6 +35,8 @@ class FiliaalController {
 	private static final String VERWIJDERD_VIEW = "filialen/verwijderd";
 	private static final String PER_POSTCODE_VIEW = "filialen/perpostcode";
 	private static final String WIJZIGEN_VIEW = "filialen/wijzigen";
+	private static final String AFSCHRIJVEN_VIEW = "filialen/afschrijven";
+	private static final String REDIRECT_NA_AFSCHRIJVEN = "redirect:/";
 
 	@Autowired
 	FiliaalController(FiliaalService filiaalService) {
@@ -131,7 +134,7 @@ class FiliaalController {
 		binder.initDirectFieldAccess();
 	}
 
-	@RequestMapping(value ="{filiaal}/wijzigen", method = RequestMethod.GET)
+	@RequestMapping(value = "{filiaal}/wijzigen", method = RequestMethod.GET)
 	ModelAndView updateForm(@PathVariable Filiaal filiaal) {
 		if (filiaal == null) {
 			return new ModelAndView(REDIRECT_URL_FILIAAL_NIET_GEVONDEN);
@@ -148,5 +151,23 @@ class FiliaalController {
 		}
 		filiaalService.update(filiaal);
 		return REDIRECT_URL_NA_WIJZIGEN;
+	}
+
+	@RequestMapping(value = "afschrijven", method = RequestMethod.GET)
+	ModelAndView afschrijvenForm() {
+		return new ModelAndView(AFSCHRIJVEN_VIEW, "filialen",
+				filiaalService.findNietAfgeschreven())
+				.addObject(new AfschrijvenForm());
+	}
+
+	@RequestMapping(value = "afschrijven", method = RequestMethod.POST)
+	ModelAndView afschrijven(@Valid AfschrijvenForm afschrijvenForm,
+			BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return new ModelAndView(AFSCHRIJVEN_VIEW, "filialen",
+					filiaalService.findNietAfgeschreven());
+		}
+		filiaalService.afschrijven(afschrijvenForm.getFilialen());
+		return new ModelAndView(REDIRECT_NA_AFSCHRIJVEN);
 	}
 }
