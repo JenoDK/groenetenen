@@ -1,0 +1,12 @@
+<filiaal>
+	<naam>Nieuw filiaal</naam>
+	<adres>
+		<straat>Nieuwe straat</straat>
+		<huisNr>1</huisNr>
+		<postcode>1000</postcode>
+		<gemeente>Brussel</gemeente>
+	</adres>
+	<hoofdFiliaal>true</hoofdFiliaal>
+	<inGebruikName>2014-12-01</inGebruikName>
+	<waardeGebouw>1000.00</waardeGebouw>
+</filiaal>
