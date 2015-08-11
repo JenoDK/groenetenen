@@ -6,6 +6,7 @@ import javax.servlet.ServletRegistration.Dynamic;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import be.vdab.aop.CreateAOPBeans;
 import be.vdab.dao.CreateDAOBeans;
 import be.vdab.datasource.CreateDataSourceBean;
 import be.vdab.mail.CreateMailBeans;
@@ -26,7 +27,7 @@ public class Initializer extends
 		return new Class<?>[] { CreateDataSourceBean.class,
 				CreateDAOBeans.class, CreateServiceBeans.class,
 				CreateRestClientBeans.class, CreateMailBeans.class,
-				CreateSecurityFilter.class };
+				CreateSecurityFilter.class, CreateAOPBeans.class };
 	}
 
 	@Override

@@ -48,7 +48,6 @@ public class CreateSecurityFilter extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.httpBasic();
 		http.formLogin()
 				.loginPage("/login")
 				.and()
@@ -56,8 +55,8 @@ public class CreateSecurityFilter extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/")
 				.and()
 				.authorizeRequests()
-				.antMatchers("/filialen/toevoegen", "/filialen/*/wijzigen",
-						"/filialen/*/verwijderen").hasAuthority(MANAGER)
+				.antMatchers("/filialen/toevoegen", "/filialen/*/wijzigen", "/filialen/*/verwijderen")
+				.hasAuthority(MANAGER)
 				.antMatchers(HttpMethod.POST, "/filialen")
 				.hasAuthority(MANAGER).antMatchers("/werknemers")
 				.hasAnyAuthority(MAGAZIJNIER, HELPDESKMEDEWERKER)
@@ -67,5 +66,6 @@ public class CreateSecurityFilter extends WebSecurityConfigurerAdapter {
 				.hasAuthority(MANAGER).antMatchers("/", "/login").permitAll()
 				.antMatchers("/**").authenticated().and().exceptionHandling()
 				.accessDeniedPage("/WEB-INF/JSP/forbidden.jsp");
+		http.httpBasic();
 	}
 }

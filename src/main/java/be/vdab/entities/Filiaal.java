@@ -135,4 +135,12 @@ public class Filiaal implements Serializable {
 	public void afschrijven() {
 		this.waardeGebouw = BigDecimal.ZERO;
 	}
+
+	@Override
+	public String toString() {
+		return "Filiaal [id=" + id + ", naam=" + naam + ", adres=" + adres
+				+ "]";
+	}
+	
+	
 }

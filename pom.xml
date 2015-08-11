@@ -143,6 +143,11 @@
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>4.0.0.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>[1.8,]</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

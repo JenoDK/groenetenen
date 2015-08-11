@@ -27,4 +27,11 @@ public class PostcodeReeks {
 		// layer)
 		return postcode >= vanpostcode && postcode <= totpostcode;
 	}
+
+	@Override
+	public String toString() {
+		return "PostcodeReeks [vanpostcode=" + vanpostcode + ", totpostcode="
+				+ totpostcode + "]";
+	}
+
 }

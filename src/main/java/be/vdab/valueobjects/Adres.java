@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 @Embeddable
 @XmlAccessorType(XmlAccessType.FIELD)
-@JsonAutoDetect(fieldVisibility=Visibility.ANY)
+@JsonAutoDetect(fieldVisibility = Visibility.ANY)
 public class Adres implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@NotBlank
@@ -37,8 +37,9 @@ public class Adres implements Serializable {
 	@SafeHtml
 	private String gemeente;
 
-	public Adres() {}
-	
+	public Adres() {
+	}
+
 	public Adres(String straat, String huisNr, Integer postcode, String gemeente) {
 		this.straat = straat;
 		this.huisNr = huisNr;
@@ -60,6 +61,12 @@ public class Adres implements Serializable {
 
 	public String getGemeente() {
 		return gemeente;
+	}
+
+	@Override
+	public String toString() {
+		return "Adres [straat=" + straat + ", huisNr=" + huisNr + ", postcode="
+				+ postcode + ", gemeente=" + gemeente + "]";
 	}
 
 }
