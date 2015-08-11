@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import be.vdab.dao.FiliaalDAO;
 import be.vdab.entities.Filiaal;
@@ -66,6 +67,7 @@ class FiliaalServiceImpl implements FiliaalService {
 	}
 
 	@Override
+	@PreAuthorize("hasAuthority('manager')")
 	public List<Filiaal> findByPostcodeReeks(PostcodeReeks reeks) {
 		return filiaalDAO.findByAdresPostcodeBetweenOrderByNaamAsc(
 				reeks.getVanpostcode(), reeks.getTotpostcode());
